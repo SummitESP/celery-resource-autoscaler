@@ -17,11 +17,17 @@ class CPULimit:
     def get_range(self, proc_count, req):
         cur_load = self._get_load()
         if cur_load > self.max_load:
-            info("CPU limit: load average %s exceeds maximum %s. Requesting scale down." % (cur_load, self.max_load))
-            return (None, proc_count-1)
+            info(
+                "CPU limit: load average %s exceeds maximum %s. Requesting scale down."
+                % (cur_load, self.max_load)
+            )
+            return (None, proc_count - 1)
         if cur_load < self.min_load:
-            info("CPU limit: load average %s below minimum %s. Requesting scale up." % (cur_load, self.min_load))
-            return (proc_count+1, None)
+            info(
+                "CPU limit: load average %s below minimum %s. Requesting scale up."
+                % (cur_load, self.min_load)
+            )
+            return (proc_count + 1, None)
         return (None, None)
 
     def _get_load(self):

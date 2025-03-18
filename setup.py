@@ -24,11 +24,7 @@ setup(
     maintainer_email='jcushman@law.harvard.edu',
     url='https://github.com/jcushman/celery-resource-autoscaler',
     license='MIT',
-
-    keywords=[
-        'celery', 'autoscale', 'scale', 'cpu'
-    ],
-
+    keywords=['celery', 'autoscale', 'scale', 'cpu'],
     classifiers=[
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
@@ -40,11 +36,9 @@ setup(
         'Programming Language :: Python :: Implementation :: CPython',
         'Programming Language :: Python :: Implementation :: PyPy',
     ],
-
     install_requires=['celery', 'psutil'],
     extras_require={
         'test': ['coverage', 'pytest', 'mock'],
     },
-
     packages=find_packages(),
 )

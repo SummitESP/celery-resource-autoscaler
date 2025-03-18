@@ -6,6 +6,7 @@ from celery.worker.autoscale import Autoscaler as CeleryAutoscaler
 logger = get_logger(__name__)
 debug, info, error = logger.debug, logger.info, logger.error
 
+
 class ResourceAutoscaler(CeleryAutoscaler):
     def __init__(self, *args, **kwargs):
         super(ResourceAutoscaler, self).__init__(*args, **kwargs)
@@ -14,7 +15,9 @@ class ResourceAutoscaler(CeleryAutoscaler):
         resource_limits = []
         for r in resource_limits_setting:
             i_class, i_args, i_kwargs = r.get('class'), r.get('args', []), r.get('kwargs', {})
-            info("Adding resource limit %s with args=%s and kwargs=%s" % (i_class, i_args, i_kwargs))
+            info(
+                "Adding resource limit %s with args=%s and kwargs=%s" % (i_class, i_args, i_kwargs)
+            )
             resource_limits.append(instantiate(i_class, *i_args, **i_kwargs))
         self.resource_limits = resource_limits
 
@@ -26,9 +29,9 @@ class ResourceAutoscaler(CeleryAutoscaler):
 
         # Get (min, max) target ranges that proc_count should fit inside
         proc_ranges = [
-                     (task_count, task_count),  # ideally we have same number of processes as pending tasks
-                     (self.min_concurrency, self.max_concurrency)
-                 ] + [r.get_range(proc_count, req) for r in self.resource_limits]
+            (task_count, task_count),  # ideally we have same number of processes as pending tasks
+            (self.min_concurrency, self.max_concurrency),
+        ] + [r.get_range(proc_count, req) for r in self.resource_limits]
 
         # Scale down to the lowest max value ...
         max_procs = min(max_procs for min_procs, max_procs in proc_ranges if max_procs is not None)

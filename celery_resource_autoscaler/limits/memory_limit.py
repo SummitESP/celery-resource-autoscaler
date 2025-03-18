@@ -14,11 +14,17 @@ class MemoryLimit:
     def get_range(self, proc_count, req):
         used_mem = self._get_used_mem()
         if used_mem > self.max_memory:
-            info("Memory limit: used memory %s exceeds maximum %s. Requesting scale down." % (used_mem, self.max_memory))
-            return (None, proc_count-1)
+            info(
+                "Memory limit: used memory %s exceeds maximum %s. Requesting scale down."
+                % (used_mem, self.max_memory)
+            )
+            return (None, proc_count - 1)
         if used_mem < self.min_memory:
-            info("Memory limit: used memory %s below minimum %s. Requesting scale up." % (used_mem, self.min_memory))
-            return (proc_count+1, None)
+            info(
+                "Memory limit: used memory %s below minimum %s. Requesting scale up."
+                % (used_mem, self.min_memory)
+            )
+            return (proc_count + 1, None)
         return (None, None)
 
     def _get_used_mem(self):
