@@ -8,7 +8,7 @@ with open('celery_resource_autoscaler/__init__.py', 'r') as f:
             version = line.strip().split('=')[1].strip(' \'"')
             break
     else:
-        version = '0.0.1'
+        version = '1.0.0'
 
 with open('README.md', 'r', encoding='utf-8') as f:
     readme = f.read()
@@ -18,8 +18,8 @@ setup(
     version=version,
     description='Celery plugin to autoscale based on available CPU, memory, or other system attributes.',
     long_description=readme,
-    author='Jack Cushman',
-    author_email='jcushman@law.harvard.edu',
+    author='Jack Cushman, Travis Johnson',
+    author_email='jcushman@law.harvard.edu, travis.johnson2@halliburton.com',
     maintainer='Jack Cushman',
     maintainer_email='jcushman@law.harvard.edu',
     url='https://github.com/jcushman/celery-resource-autoscaler',
